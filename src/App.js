@@ -1,25 +1,39 @@
-import logo from './logo.svg';
-import './App.css';
+import {
+  createBrowserRouter,
+  RouterProvider,
+} from 'react-router-dom';
+import MainTemplate from "./components/MainTemplate";
+import HomePage from "./components/HomePage";
+import DriftPage from "./components/DriftPage";
+import TimeAttackPage from "./components/TimeAttackPage";
+import ForzaPage from "./components/ForzaPage";
 
-function App() {
+export default function App() {
+  const router = createBrowserRouter([{
+    path: "/",
+    element: <MainTemplate/>,
+    children: [
+      {
+        path: '/',
+        exact: true,
+        element: <HomePage/>,
+      },
+      {
+        path: '/drift',
+        element: <DriftPage/>
+      },
+      {
+        path: '/timeattack',
+        element: <TimeAttackPage/>,
+      },
+      {
+        path: '/forza',
+        element: <ForzaPage/>
+      },
+    ]
+  }]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <RouterProvider router={router} />
   );
 }
-
-export default App;
